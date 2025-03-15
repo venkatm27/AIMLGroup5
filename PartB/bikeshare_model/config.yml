@@ -1,0 +1,129 @@
+# Data Files
+training_data_file: bike-sharing-dataset.csv
+# test_data_file: test.csv
+
+# Variables
+# The variable we are attempting to predict (cnt)
+target: cnt
+
+pipeline_name: bikeshare_model
+pipeline_save_file: bikeshare__model_output_v
+
+features:      # final features to be use
+  - dteday
+  - season
+  - hr 
+  - holiday 
+  - weekday
+  - workingday
+  - weathersit
+  - temp       
+  - atemp
+  - hum
+  - windspeed
+  - yr          # Derived from dteday <-- generated before pipeline get_year_and_month() 
+  - mnth        # Derived from dteday <-- generated before pipeline get_year_and_month()
+
+unused_fields:  # Features to drop before pipeline
+  - casual
+  - registered
+
+numerical_features: # Numarical features to do outlier removal
+  - temp
+  - atemp
+  - hum 
+  - windspeed
+
+# Features inside processing pipeline
+
+weekday_var: weekday  # first imputatation , then --> Mappeing
+  
+weathersit_var: weathersit
+
+yr_var: yr
+
+hr_var: hr
+
+mnth_var: mnth
+
+season_var: season
+
+holiday_var: holiday
+
+workingday_var: workingday 
+
+
+yr_mappings:
+  '2012': 0
+  '2011': 1  
+
+mnth_mappings:
+  'January': 0
+  'February': 1
+  'March': 2
+  'April': 3
+  'May': 4
+  'June': 5
+  'July': 6
+  'August': 7
+  'September': 8
+  'October': 9
+  'November': 10
+  'December': 11
+
+season_mappings:
+  'winter': 0
+  'fall': 1
+  'spring': 2
+  'summer': 3
+
+weathersit_mappings:
+  'Mist': 0
+  'Clear': 1
+  'Light Rain': 2
+  'Heavy Rain': 3
+
+holiday_mappings:
+  'No': 0
+  'Yes': 1
+
+workingday_mappings:
+  'No': 0
+  'Yes': 1
+
+hr_mappings: 
+  '12am': 0
+  '1am': 1
+  '2am': 2
+  '3am': 3
+  '4am': 4
+  '5am': 5
+  '6am': 6
+  '7am': 7
+  '8am': 8
+  '9am': 9
+  '10am': 10
+  '11am': 11
+  '11pm': 12
+  '12pm': 13
+  '1pm': 14
+  '2pm': 15
+  '3pm': 16
+  '4pm': 17
+  '5pm': 18
+  '6pm': 19
+  '7pm': 20
+  '8pm': 21
+  '9pm': 22
+  '10pm': 23
+
+  
+# set train/test split
+test_size: 0.20
+
+# to set the random seed
+random_state: 42
+# alogrithm parameters
+n_estimators: 150
+max_depth: 5
+max_features: 3
